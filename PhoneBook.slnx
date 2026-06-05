@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Src/" />
+  <Folder Name="/Src/Core/">
+    <Project Path="Core/PhoneBook.Core.Application.Service/PhoneBook.Core.Application.Service.csproj" />
+    <Project Path="Core/PhoneBook.Core.Application/PhoneBook.Core.Application.csproj" />
+    <Project Path="Core/PhoneBook.Core.Domain/PhoneBook.Core.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Src/Infrastructure/">
+    <Project Path="Infrastructure/PhoneBook.Infrastructure.Repository/PhoneBook.Infrastructure.Repository.csproj" />
+  </Folder>
+  <Folder Name="/Src/Server/">
+    <Project Path="Server/PhoneBook.Server.csproj" />
+  </Folder>
+</Solution>

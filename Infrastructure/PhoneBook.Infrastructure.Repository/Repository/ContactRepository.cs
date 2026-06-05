@@ -1,0 +1,60 @@
+﻿using PhoneBook.Core.Domain.Entities;
+using PhoneBook.Core.Domain.IRepositories;
+
+namespace PhoneBook.Infrastructure.Repository.Repository;
+
+public class ContactRepository : IContactRepository
+{
+    private readonly List<ContactEnity> _contacts = [];
+    public Task AddAsync(ContactEnity contact)
+    {
+        _contacts.Add(contact);
+
+        return Task.CompletedTask;
+    }
+
+    public Task DeleteAsync(int id)
+    {
+        var contact = _contacts
+            .FirstOrDefault(x => x.Id == id);
+
+        if (contact is not null)
+        {
+            _contacts.Remove(contact);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public Task<ContactEnity?> GetByIdAsync(int id)
+    {
+        var contact = _contacts
+            .FirstOrDefault(x => x.Id == id);
+
+        return Task.FromResult(contact);
+    }
+
+    public Task<List<ContactEnity>> GetByTagAsync(string tag)
+    {
+        var contacts = _contacts
+           .Where(x => x.Tag == tag)
+           .ToList();
+
+        return Task.FromResult(contacts);
+    }
+
+    public Task UpdateAsync(ContactEnity contact)
+    {
+        var currentContact = _contacts
+           .FirstOrDefault(x => x.Id == contact.Id);
+
+        if (currentContact is null)
+            return Task.CompletedTask;
+
+        _contacts.Remove(currentContact);
+
+        _contacts.Add(contact);
+
+        return Task.CompletedTask;
+    }
+}

@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Dto\Requests\**" />
+    <EmbeddedResource Remove="Dto\Requests\**" />
+    <None Remove="Dto\Requests\**" />
+  </ItemGroup>
+
 </Project>

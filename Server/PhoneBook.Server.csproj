@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Infrastructure\PhoneBook.Infrastructure.Repository\PhoneBook.Infrastructure.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

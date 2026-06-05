@@ -6,13 +6,15 @@ using PhoneBook.Infrastructure.Repository.Repository;
 
 public class Startup(IConfiguration configuration)
 {
+
     private readonly IConfiguration _configuration = configuration;
+
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-
+        services.AddMemoryCache();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
-
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
@@ -21,22 +23,24 @@ public class Startup(IConfiguration configuration)
                 Title = "PhoneBook",
             });
         });
-        services.AddSingleton<IContactRepository, ContactRepository>();
 
-        services.AddScoped<IContactService, ContactService>();
+        services.AddSingleton<IContactRepository, ContactRepository>();
+        services.AddSingleton<IContactService, ContactService>();
     }
+
+
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseSwagger();
-
         app.UseSwaggerUI();
-
+        app.UseAuthentication();
         app.UseRouting();
-
+        app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
+
     }
 }

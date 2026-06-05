@@ -1,12 +1,29 @@
 ﻿using PhoneBook.Core.Application.Dto;
 using PhoneBook.Core.Application.IService;
+using PhoneBook.Core.Application.Service.Helper;
+using PhoneBook.Core.Domain.IRepositories;
 
 namespace PhoneBook.Core.Application.Service.Service;
 
-public class ContactService : IContactService
+public class ContactService(IContactRepository contactRepository) : IContactService
 {
-    public Task<ContactDto> AddNewContactAsync(ContactDto contact)
+    private readonly IContactRepository _contactRepository = contactRepository;
+    public async Task<ContactDto> AddNewContactAsync(ContactDto contact)
     {
+
+        try
+        {
+            var entity = contact.ToEntity();
+            await _contactRepository.AddAsync(entity);
+            return entity.ToDto();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
+
         throw new NotImplementedException();
     }
 

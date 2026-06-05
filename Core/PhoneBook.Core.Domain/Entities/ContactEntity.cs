@@ -1,6 +1,6 @@
 ﻿namespace PhoneBook.Core.Domain.Entities;
 
-public class ContactEnity
+public class ContactEntity
 {
     public int Id { get; set; }
     public string? FirstName { get; set; }

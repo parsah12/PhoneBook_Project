@@ -4,13 +4,13 @@ namespace PhoneBook.Core.Domain.IRepositories;
 
 public interface IContactRepository
 {
-    Task AddAsync(ContactEnity contact);
+    Task AddAsync(ContactEntity contact);
 
-    Task UpdateAsync(ContactEnity contact);
+    Task UpdateAsync(ContactEntity contact);
 
     Task DeleteAsync(int id);
 
-    Task<ContactEnity?> GetByIdAsync(int id);
+    Task<ContactEntity?> GetByIdAsync(int id);
 
-    Task<List<ContactEnity>> GetByTagAsync(string tag);
+    Task<List<ContactEntity>> GetByTagAsync(string tag);
 }

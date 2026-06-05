@@ -5,8 +5,8 @@ namespace PhoneBook.Infrastructure.Repository.Repository;
 
 public class ContactRepository : IContactRepository
 {
-    private readonly List<ContactEnity> _contacts = [];
-    public Task AddAsync(ContactEnity contact)
+    private readonly List<ContactEntity> _contacts = [];
+    public Task AddAsync(ContactEntity contact)
     {
         _contacts.Add(contact);
 
@@ -26,7 +26,7 @@ public class ContactRepository : IContactRepository
         return Task.CompletedTask;
     }
 
-    public Task<ContactEnity?> GetByIdAsync(int id)
+    public Task<ContactEntity?> GetByIdAsync(int id)
     {
         var contact = _contacts
             .FirstOrDefault(x => x.Id == id);
@@ -34,7 +34,7 @@ public class ContactRepository : IContactRepository
         return Task.FromResult(contact);
     }
 
-    public Task<List<ContactEnity>> GetByTagAsync(string tag)
+    public Task<List<ContactEntity>> GetByTagAsync(string tag)
     {
         var contacts = _contacts
            .Where(x => x.Tag == tag)
@@ -43,7 +43,7 @@ public class ContactRepository : IContactRepository
         return Task.FromResult(contacts);
     }
 
-    public Task UpdateAsync(ContactEnity contact)
+    public Task UpdateAsync(ContactEntity contact)
     {
         var currentContact = _contacts
            .FirstOrDefault(x => x.Id == contact.Id);

@@ -11,4 +11,7 @@
   <Folder Name="/Src/Server/">
     <Project Path="Server/PhoneBook.Server.csproj" />
   </Folder>
+  <Folder Name="/Test/">
+    <Project Path="PhoneBookUnitTest/PhoneBookUnitTest.csproj" Id="08ea0527-bcb1-4424-a272-24b180893a8e" />
+  </Folder>
 </Solution>

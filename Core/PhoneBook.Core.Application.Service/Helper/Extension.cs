@@ -19,14 +19,13 @@ public static class Extension
 
     public static ContactEntity ToEntity(this ContactDto dto)
     {
-        return new ContactEntity
+        return new ContactEntity(
+            dto.FirstName ?? string.Empty,
+            dto.LastName ?? string.Empty,
+            dto.PhoneNumber ?? string.Empty,
+            dto.Tag ?? string.Empty)
         {
-            Id = dto.Id,
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            PhoneNumber = dto.PhoneNumber,
-            Tag = dto.Tag
+            Id = dto.Id 
         };
-           
     }
 }

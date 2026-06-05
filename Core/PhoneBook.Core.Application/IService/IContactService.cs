@@ -5,9 +5,7 @@ namespace PhoneBook.Core.Application.IService;
 public interface IContactService
 {
     Task<ContactDto> AddNewContactAsync(ContactDto contact);
-
-    Task<ContactDto> UpdateContactAsync(int id,ContactDto contact);
-
+    Task<ContactDto> UpdateContactAsync(int id, string? firstName, string? lastName, string? phoneNumber, string? tag);
     Task DeleteContactAsync(int id);
 
     Task<List<ContactDto>> GetAllContactsAsync();

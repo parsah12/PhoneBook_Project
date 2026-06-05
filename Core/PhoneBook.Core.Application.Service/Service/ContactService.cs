@@ -22,28 +22,77 @@ public class ContactService(IContactRepository contactRepository) : IContactServ
 
             throw;
         }
-
-
-        throw new NotImplementedException();
     }
 
-    public Task DeleteContactAsync(int id)
+    public async Task DeleteContactAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var contact = await _contactRepository.GetByIdAsync(id);
+
+            if (contact is null)
+            {
+                throw new Exception("Contact not found");
+            }
+
+            await _contactRepository.DeleteAsync(id);
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
     }
 
-    public Task<List<ContactDto>> GetAllContactsAsync()
+    public async Task<List<ContactDto>> GetAllContactsAsync()
     {
-        throw new NotImplementedException();
+
+        try
+        {
+            var contacts = await _contactRepository.GetAllAsync();
+
+            return contacts
+                .Select(x => x.ToDto())
+                .ToList();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
-    public Task<List<ContactDto>> GetContactByTagAsync(string tag)
+    public async Task<List<ContactDto>> GetContactByTagAsync(string tag)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var contacts = await _contactRepository.GetByTagAsync(tag);
+
+            return contacts
+                .Select(x => x.ToDto())
+                .ToList();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
-    public Task<ContactDto> UpdateContactAsync(int id, ContactDto contact)
+    public async Task<ContactDto> UpdateContactAsync(int id, string? firstName, string? lastName, string? phoneNumber, string? tag)
     {
-        throw new NotImplementedException();
+        var contact = await _contactRepository.GetByIdAsync(id);
+
+        if (contact is null)
+            throw new Exception("Contact not found");
+
+        contact.Update(
+            firstName,
+            lastName,
+            phoneNumber,
+            tag);
+
+        return contact.ToDto();
     }
 }

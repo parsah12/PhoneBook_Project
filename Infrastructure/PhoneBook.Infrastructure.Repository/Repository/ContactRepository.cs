@@ -1,5 +1,6 @@
 ﻿using PhoneBook.Core.Domain.Entities;
 using PhoneBook.Core.Domain.IRepositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Infrastructure.Repository.Repository;
 
@@ -37,24 +38,15 @@ public class ContactRepository : IContactRepository
     public Task<List<ContactEntity>> GetByTagAsync(string tag)
     {
         var contacts = _contacts
-           .Where(x => x.Tag == tag)
-           .ToList();
+            .Where(x => x.Tag != null &&
+                        x.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase))
+            .ToList();
 
         return Task.FromResult(contacts);
     }
 
-    public Task UpdateAsync(ContactEntity contact)
+    public Task<List<ContactEntity>> GetAllAsync()
     {
-        var currentContact = _contacts
-           .FirstOrDefault(x => x.Id == contact.Id);
-
-        if (currentContact is null)
-            return Task.CompletedTask;
-
-        _contacts.Remove(currentContact);
-
-        _contacts.Add(contact);
-
-        return Task.CompletedTask;
+        return Task.FromResult(_contacts);
     }
 }
